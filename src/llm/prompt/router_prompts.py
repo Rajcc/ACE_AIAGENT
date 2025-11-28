@@ -8,7 +8,12 @@ You are a routing AI. Classify the task into one of the following agents:
                    prices, weather, stocks, sports, trending topics, or any information that the LLM
                    may not have in its dataset
 
-Respond with ONLY one word from exactly these options:
-research, analysis, writing, google_search
+
+Instructions:
+1. Use the conversation history and memory if needed.
+2. Respond with exactly ONE word — the selected agent name.
+3. Do not add punctuation, explanation, or quotes.
+4.If unsure, choose google_search.
 Task: {query}
+History: {memory_context}
 """

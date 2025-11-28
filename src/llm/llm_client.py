@@ -5,11 +5,11 @@ from groq import Groq
 load_dotenv()
 
 class GroqLLM:
-    def __init__(self,model="llama-3.1-70b-versatile"):
+    def __init__(self,model="llama-3.3-70b-versatile"):
         self.client=Groq(api_key=os.getenv("Groq_API_KEY"))
         self.model=model
 
-        def chat(self,messages):
+    def chat(self,messages):
             response=self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,

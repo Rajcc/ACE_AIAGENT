@@ -8,6 +8,9 @@ class google_search_agent:
     def __init__(self):
         self.api_key = serper_api_key
         self.search_url = "https://google.serper.dev/search"
+
+    def execute(self,query:str,memory_context=None):
+        return self.search(query)
     def search(self,query:str):
         try:
             params={
@@ -26,6 +29,6 @@ class google_search_agent:
             for i in results[:5]:
                 summary+=f"Title: {i.get('title')}\nSnippet: {i.get('snippet')}\nLink: {i.get('link')}\n\n"
 
-                return f"top 5 Google Search Results:\n\n{summary}"
+            return f"top 5 Google Search Results:\n\n{summary}"
         except Exception as e:
-                return f"An error occurred during the search: {str(e)}"
+            return f"An error occurred during the search: {str(e)}"

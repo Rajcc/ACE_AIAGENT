@@ -6,7 +6,8 @@ class router:
         self.llm=GroqLLM()
 
     def route(self,query:str):
-        prompt=Router_prompts.format(query=query)
+        prompt=Router_prompts.format(query=query,memory_context="memory")
+
         
         result=self.llm.chat([
             {"role":"system","content":" You are a routing AI."},
