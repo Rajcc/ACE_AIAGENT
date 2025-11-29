@@ -14,7 +14,7 @@ class Memory_bank:
             content=f.read().strip()
             if not content:
                 return[]
-            return json.load(content)
+            return json.loads(content)
         
     def save_memory(self,memory:str):
         if memory not in self.memory:

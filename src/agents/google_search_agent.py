@@ -1,6 +1,8 @@
 import os
 import requests
 import json
+from llm.prompt.google_search_prompt import google_search_prompt
+from llm.llm_client import GroqLLM
 
 serper_api_key = os.getenv("serper_API_KEY")
 
@@ -8,9 +10,27 @@ class google_search_agent:
     def __init__(self):
         self.api_key = serper_api_key
         self.search_url = "https://google.serper.dev/search"
+        self.llm=GroqLLM()
+        self.prompt_google=google_search_prompt
+
 
     def execute(self,query:str,memory_context=None):
-        return self.search(query)
+        raw_results= self.search(query)
+
+        prompt=self.prompt_google.format(query=query,search_results=raw_results,memory_context=memory_context if memory_context else "no prevoius context")
+
+        message=[]   
+
+        if memory_context:
+           message.extend(memory_context)
+
+        message.append({"role": "system", "content": "You are an expert Google Search AI agent."})
+
+        message.append({"role": "user", "content": prompt})
+
+        response=self.llm.chat(message)
+
+        return response
     def search(self,query:str):
         try:
             params={

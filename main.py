@@ -11,13 +11,13 @@ import traceback
 from src.memory.memory_bank import Memory_bank
 from src.memory.session_service import Sessionservice
 
-# ---------------- DEBUG LOGGER SETUP ----------------
+
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
 logger = logging.getLogger("debug")
-# ----------------------------------------------------
+
 
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.append(str(BASE_DIR))
@@ -69,8 +69,7 @@ async def chat_endpoint(message: Message):
         response = await loop.run_in_executor(None, orch.run, message.message)
         logger.debug(f"Agent Response: {response}")
 
-        # memory.save_memory(f"User: {message.message}")
-        # memory.save_memory(f"Agent ({agent_type}): {response}")
+       
 
         return {"agent": agent_type, "response": response}
 

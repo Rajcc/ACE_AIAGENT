@@ -50,7 +50,7 @@ class orchestrator:
             return response
     
     def store_important_memory(self,user_query:str,response:str):
-         important_keywords=["I like", "my name is", "I prefer", "I am working on", "I plan to", "remember"]
+         important_keywords=["i like", "my name is", "i prefer", "i am working on", "i plan to", "remember"]
          text=user_query.lower() 
 
          if any (k in text for k in important_keywords):
